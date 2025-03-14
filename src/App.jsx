@@ -1,33 +1,33 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Navbar from './components/Navbar/Navbar'
-import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home/Home'
-import Cart from './pages/Cart/Cart'
-import PlaceOrder from './pages/PlaceOrder/PlaceOrder';
-import Footer from './components/Footer/Footer';
-import LoginPopup from './components/LoginPopup/LoginPopup';
+import Sidebar from './components/Sidebar/Sidebar'
+import { Route, Routes } from 'react-router-dom'
+import List from './pages/List/List'
+import Add from './pages/Add/Add'
+import Order from './pages/Order/Order'
+
+import { ToastContainer} from 'react-toastify'; // for notification
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
-
-  const [showLogin,setShowLogin] =useState(false)
-
+  const url="http://localhost:4003"
 
   return (
-    <>
-    {showLogin?<LoginPopup setShowLogin={setShowLogin}/>:<></>} 
-     <div className='app'>
-      <Navbar setShowLogin={setShowLogin} />
-      <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/cart' element={<Cart/>} />
-        <Route path='/order' element={<PlaceOrder/>} />
-      </Routes>
+    <div>
+      <ToastContainer />
+      <Navbar />
+      <hr />
+      <div className="app-content">
+        <Sidebar />
+        <Routes>
+          <Route path='/add' element={<Add url={url} />} />
+          <Route path='/list' element={<List url={url} />} />
+          <Route path='/order' element={<Order url={url} />} />
 
+        </Routes>
+      </div>
     </div>
-    <Footer />
-    </>
-   
   )
 }
 
-export default App;
+export default App
